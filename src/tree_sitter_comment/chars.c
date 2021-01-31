@@ -7,7 +7,7 @@ bool is_newline(int32_t c)
     CHAR_NEWLINE,
     CHAR_CARRIAGE_RETURN,
   };
-  const int length = 3;
+  const int length = sizeof(newline_chars) / sizeof(int32_t);
   for (int i = 0; i < length; i++) {
     if (c == newline_chars[i]) {
       return true;
@@ -24,7 +24,7 @@ bool is_space(int32_t c)
     CHAR_TAB,
     CHAR_VERTICAL_TAB,
   };
-  const int length = 4;
+  const int length = sizeof(space_chars) / sizeof(int32_t);
   bool is_space_char = false;
   for (int i = 0; i < length; i++) {
     if (c == space_chars[i]) {
@@ -35,7 +35,42 @@ bool is_space(int32_t c)
   return is_space_char || is_newline(c);
 }
 
+/// Check if the character is allowed inside the name.
 bool is_internal_char(int32_t c)
 {
-  return c == '-' || c == '_';
+  const int32_t valid_chars[] = {
+    '-',
+    '_',
+  };
+  const int length = sizeof(valid_chars) / sizeof(int32_t);
+  for (int i = 0; i < length; i++) {
+    if (c == valid_chars[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/// Check if it's a start char.
+///
+/// Some tokens can start after non-whitespace chars.
+bool is_start_char(int32_t c)
+{
+  const int32_t valid_chars[] = {
+    '-',
+    '/',
+    '\'',
+    '"',
+    '<',
+    '(',
+    '[',
+    '{',
+  };
+  const int length = sizeof(valid_chars) / sizeof(int32_t);
+  for (int i = 0; i < length; i++) {
+    if (c == valid_chars[i]) {
+      return true;
+    }
+  }
+  return false;
 }

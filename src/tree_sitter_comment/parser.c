@@ -15,24 +15,32 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   int32_t previous = lexer->lookahead;
   lexer->advance(lexer, false);
 
-  while (isupper(lexer->lookahead) || isdigit(lexer->lookahead) || is_internal_char(lexer->lookahead)) {
+  while (isupper(lexer->lookahead)
+      || isdigit(lexer->lookahead)
+      || is_internal_char(lexer->lookahead)) {
     previous = lexer->lookahead;
     lexer->advance(lexer, false);
   }
   lexer->mark_end(lexer);
 
+  // It can't end with an internal char.
   if (is_internal_char(previous)) {
     return parse_text(lexer, valid_symbols, false);
   }
 
-  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) || lexer->lookahead == '(') {
+  // For the user component this is `\s*(`.
+  // We don't parse that part, we just need to be sure it ends with `:\s`.
+  if ((is_space(lexer->lookahead) && !is_newline(lexer->lookahead))
+      || lexer->lookahead == '(') {
     // Skip white spaces.
     while (is_space(lexer->lookahead) && !is_newline(lexer->lookahead)) {
       lexer->advance(lexer, false);
     }
+    // Checking aperture.
     if (lexer->lookahead != '(') {
       return parse_text(lexer, valid_symbols, true);
     }
+    // Checking closure.
     while (lexer->lookahead != ')') {
       if (is_newline(lexer->lookahead)) {
         return parse_text(lexer, valid_symbols, true);
@@ -42,10 +50,12 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     lexer->advance(lexer, false);
   }
 
+  // It should end with `:`...
   if (lexer->lookahead != ':') {
     return parse_text(lexer, valid_symbols, false);
   }
 
+  // ... and be followed by one space.
   lexer->advance(lexer, false);
   if (!is_space(lexer->lookahead)) {
     return parse_text(lexer, valid_symbols, false);
@@ -65,8 +75,13 @@ bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
     return false;
   }
   while (!is_space(lexer->lookahead)) {
+    if (is_start_char(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+      break;
+    }
     lexer->advance(lexer, false);
   }
+
   if (end) {
     lexer->mark_end(lexer);
   }
@@ -77,8 +92,7 @@ bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
 bool tree_sitter_comment_parse(TSLexer* lexer, const bool* valid_symbols)
 {
   if (isupper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
-    bool result = parse_tagname(lexer, valid_symbols);
-    return result;
+    return parse_tagname(lexer, valid_symbols);
   }
   if (!is_space(lexer->lookahead) && valid_symbols[T_TEXT]) {
     return parse_text(lexer, valid_symbols, true);

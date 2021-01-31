@@ -10,9 +10,21 @@ TODO:    extra white spaces.
 
 NOTAG:missing space
 
+(TODO: I'm inside parentheses)
+
+NOTE:
+
+"NOTE: this should work!"
+
+DEBUG: thís shoúld wórk with $weird$ symbols
+
 ---
 
 (source
+  (tag (name))
+  (tag (name))
+  (tag (name))
+  (tag (name))
   (tag (name))
   (tag (name))
   (tag (name)))
@@ -29,9 +41,18 @@ TODO(@todo):    extra white spaces.
 
 NOTAG(tag):missing space
 
+(TODO (someone): I'm inside parentheses)
+
+NOTE(a user):
+
+"NOTE (a user): this should work!"
+
 ---
 
 (source
+  (tag (name) (user))
+  (tag (name) (user))
+  (tag (name) (user))
   (tag (name) (user))
   (tag (name) (user))
   (tag (name) (user)))
