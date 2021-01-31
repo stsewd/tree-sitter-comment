@@ -8,12 +8,15 @@ Useful to be embedded inside comments.
 Since comment tags aren't a programming language or have a standard,
 I have chosen to follow popular conventions for the syntax.
 
-* Comment tags must contain:
+* Comment tags can contain:
   - Upper case ascii letters
-  - Numbers
+  - Numbers (can't start with one)
   - `-`, `_` (they can't start or end whit these characters)
 * Optionally can have an user linked to the tag inside parentheses `()`
 * The name must be followed by `:` and a whitespace
+
+If you think there are other popular conventions this syntax doesn't cover,
+feel free to open a issue.
 
 ## Examples
 

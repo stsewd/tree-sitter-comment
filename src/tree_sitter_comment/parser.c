@@ -6,6 +6,14 @@
 #include "tree_sitter_comment/chars.c"
 #include "tree_sitter_comment/tokens.h"
 
+/// Parse a the name of the tag.
+///
+/// They can be of the form:
+/// - TODO:
+/// - TODO: text
+/// - TODO(stsewd):
+/// - TODO(stsewd): text
+/// - TODO (stsewd): text
 bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
   if (!isupper(lexer->lookahead) || !valid_symbols[T_TAGNAME]) {
@@ -65,6 +73,9 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
   return true;
 }
 
+/// Parse normal text.
+///
+/// Text nodes are september by white spaces or an start char like `(`
 bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
 {
   if (is_space(lexer->lookahead) || !valid_symbols[T_TEXT]) {
