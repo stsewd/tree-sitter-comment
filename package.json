@@ -1,0 +1,29 @@
+{
+  "name": "tree-sitter-codetags",
+  "version": "0.0.1",
+  "description": "Grammar for code tags like TODO:, FiXME(stsewd):, etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tree-sitter test",
+    "build": "tree-sitter generate",
+    "wasm": "tree-sitter build-wasm",
+    "web": "tree-sitter web-ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gihub.com/stsewd/tree-sitter-code-tags"
+  },
+  "keywords": [
+    "tree-sitter",
+    "gramar",
+    "code-tags"
+  ],
+  "author": "Santos Gallegos",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.2"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.16.9"
+  }
+}
