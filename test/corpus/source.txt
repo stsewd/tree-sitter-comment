@@ -1,0 +1,37 @@
+===========
+Simple tags
+===========
+
+TODO: something
+
+XXX: fix something else.
+
+TODO:    extra white spaces.
+
+NOTAG:missing space
+
+---
+
+(source
+  (tag (name))
+  (tag (name))
+  (tag (name)))
+
+==============
+Decorated tags
+==============
+
+TODO(stsewd): something
+
+XXX (monday): fix something else.
+
+TODO(@todo):    extra white spaces.
+
+NOTAG(tag):missing space
+
+---
+
+(source
+  (tag (name) (user))
+  (tag (name) (user))
+  (tag (name) (user)))

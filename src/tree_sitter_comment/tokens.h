@@ -1,0 +1,9 @@
+#ifndef TREE_SITTER_COMMENT_TOKENS_H
+#define TREE_SITTER_COMMENT_TOKENS_H
+
+enum TokenType {
+  T_TAGNAME,
+  T_TEXT,
+};
+
+#endif /* ifndef TREE_SITTER_COMMENT_TOKENS_H */
