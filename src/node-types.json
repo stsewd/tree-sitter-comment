@@ -50,6 +50,10 @@
     "named": true
   },
   {
+    "type": "text",
+    "named": false
+  },
+  {
     "type": "user",
     "named": true
   }

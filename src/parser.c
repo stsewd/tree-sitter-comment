@@ -39,7 +39,7 @@ static const char *ts_symbol_names[] = {
   [sym___newline] = "__newline",
   [sym___whitespace] = "__whitespace",
   [sym_name] = "name",
-  [sym__text] = "_text",
+  [sym__text] = "text",
   [sym_source] = "source",
   [sym_tag] = "tag",
   [sym__user] = "_user",
@@ -96,8 +96,8 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [sym__text] = {
-    .visible = false,
-    .named = true,
+    .visible = true,
+    .named = false,
   },
   [sym_source] = {
     .visible = true,

@@ -11,8 +11,13 @@
             "name": "tag"
           },
           {
-            "type": "SYMBOL",
-            "name": "_text"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_text"
+            },
+            "named": false,
+            "value": "text"
           }
         ]
       }

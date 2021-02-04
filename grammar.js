@@ -18,7 +18,7 @@ module.exports = grammar({
     source: $ => repeat(
       choice(
         $.tag,
-        $._text,
+        alias($._text, 'text'),
       ),
     ),
 
