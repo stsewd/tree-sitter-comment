@@ -1,6 +1,5 @@
 #include "tree_sitter_comment/parser.h"
 
-#include <ctype.h>
 #include <stdio.h>
 
 #include "tree_sitter_comment/chars.c"
@@ -16,15 +15,15 @@
 /// - TODO (stsewd): text
 bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 {
-  if (!isupper(lexer->lookahead) || !valid_symbols[T_TAGNAME]) {
+  if (!is_upper(lexer->lookahead) || !valid_symbols[T_TAGNAME]) {
     return false;
   }
 
   int32_t previous = lexer->lookahead;
   lexer->advance(lexer, false);
 
-  while (isupper(lexer->lookahead)
-      || isdigit(lexer->lookahead)
+  while (is_upper(lexer->lookahead)
+      || is_digit(lexer->lookahead)
       || is_internal_char(lexer->lookahead)) {
     previous = lexer->lookahead;
     lexer->advance(lexer, false);
@@ -102,7 +101,7 @@ bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
 
 bool tree_sitter_comment_parse(TSLexer* lexer, const bool* valid_symbols)
 {
-  if (isupper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
+  if (is_upper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
     return parse_tagname(lexer, valid_symbols);
   }
   if (!is_space(lexer->lookahead) && valid_symbols[T_TEXT]) {

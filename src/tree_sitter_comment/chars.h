@@ -16,6 +16,8 @@
 bool is_internal_char(int32_t c);
 bool is_newline(int32_t c);
 bool is_space(int32_t c);
+bool is_upper(int32_t c);
+bool is_digit(int32_t c);
 bool is_start_char(int32_t c);
 
 #endif /* ifndef TREE_SITTER_COMMENT_CHARS_H */

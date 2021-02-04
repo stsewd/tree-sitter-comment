@@ -1,5 +1,19 @@
 #include "tree_sitter_comment/chars.h"
 
+bool is_upper(int32_t c)
+{
+  const int32_t upper = 65;
+  const int32_t lower = 90;
+  return c >= upper && c <= lower;
+}
+
+bool is_digit(int32_t c)
+{
+  const int32_t upper = 48;
+  const int32_t lower = 57;
+  return c >= upper && c <= lower;
+}
+
 bool is_newline(int32_t c)
 {
   const int32_t newline_chars[] = {
