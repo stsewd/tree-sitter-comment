@@ -84,12 +84,16 @@ bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
     }
     return false;
   }
-  while (!is_space(lexer->lookahead)) {
-    if (is_start_char(lexer->lookahead)) {
-      lexer->advance(lexer, false);
-      break;
-    }
+
+  if (is_start_char(lexer->lookahead) || is_end_char(lexer->lookahead)) {
     lexer->advance(lexer, false);
+  } else {
+    while (!is_space(lexer->lookahead)) {
+      if (is_start_char(lexer->lookahead) || is_end_char(lexer->lookahead)) {
+        break;
+      }
+      lexer->advance(lexer, false);
+    }
   }
 
   if (end) {

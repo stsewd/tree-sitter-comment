@@ -88,3 +88,34 @@ bool is_start_char(int32_t c)
   }
   return false;
 }
+
+/// Check if it's an end char.
+///
+/// Some tokens can end after non-whitespace chars.
+bool is_end_char(int32_t c)
+{
+  const int32_t valid_chars[] = {
+    '-',
+    '.',
+    ',',
+    ':',
+    ';',
+    '!',
+    '?',
+    '\\',
+    '/',
+    '\'',
+    '"',
+    ')',
+    ']',
+    '}',
+    '>',
+  };
+  const int length = sizeof(valid_chars) / sizeof(int32_t);
+  for (int i = 0; i < length; i++) {
+    if (c == valid_chars[i]) {
+      return true;
+    }
+  }
+  return false;
+}
