@@ -40,8 +40,12 @@ NOTE_BUG: or by `_`.
 
 ## Why C?
 
-Tree-sitter is a [LR parser](https://en.wikipedia.org/wiki/LR_parser) (context-free grammar),
-that means it works great for context-free grammars that don't require backtracking,
-or a state for whitespaces (like indentation).
+Tree-sitter is a [LR parser](https://en.wikipedia.org/wiki/LR_parser) for context-free grammars,
+that means it works great for grammars that don't require backtracking,
+or to keep a state for whitespaces (like indentation).
 For these reasons, parsing _languages_ that need to keep a state or falling back to a general token,
 it requires some manual parsing in C.
+
+## Other grammars
+
+- [tree-sitter-rst](https://github.com/stsewd/tree-sitter-rst): reStructuredText grammar.
