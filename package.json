@@ -11,12 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gihub.com/stsewd/tree-sitter-code-tags"
+    "url": "https://gihub.com/stsewd/tree-sitter-comment"
   },
   "keywords": [
     "tree-sitter",
     "gramar",
-    "code-tags"
+    "code-tags",
+    "comments-tags",
+    "comments"
   ],
   "author": "Santos Gallegos",
   "license": "MIT",
@@ -24,6 +26,6 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.16.9"
+    "tree-sitter-cli": "^0.17.3"
   }
 }
