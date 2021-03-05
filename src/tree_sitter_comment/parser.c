@@ -1,7 +1,5 @@
 #include "tree_sitter_comment/parser.h"
 
-#include <stdio.h>
-
 #include "tree_sitter_comment/chars.c"
 #include "tree_sitter_comment/tokens.h"
 
