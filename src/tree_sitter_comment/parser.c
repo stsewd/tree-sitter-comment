@@ -3,7 +3,7 @@
 #include "tree_sitter_comment/chars.c"
 #include "tree_sitter_comment/tokens.h"
 
-/// Parse a the name of the tag.
+/// Parse the name of the tag.
 ///
 /// They can be of the form:
 /// - TODO:
@@ -43,12 +43,12 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     }
     // Checking aperture.
     if (lexer->lookahead != '(') {
-      return parse_text(lexer, valid_symbols, true);
+      return parse_text(lexer, valid_symbols, false);
     }
     // Checking closure.
     while (lexer->lookahead != ')') {
       if (is_newline(lexer->lookahead)) {
-        return parse_text(lexer, valid_symbols, true);
+        return parse_text(lexer, valid_symbols, false);
       }
       lexer->advance(lexer, false);
     }
@@ -72,11 +72,15 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
 
 /// Parse normal text.
 ///
-/// Text nodes are september by white spaces or an start char like `(`
+/// Text nodes are separated by white spaces or an start char like `(`
 bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
 {
-  if (is_space(lexer->lookahead) || !valid_symbols[T_TEXT]) {
-    if (!end && valid_symbols[T_TEXT]) {
+  if (!valid_symbols[T_TEXT]) {
+    return false;
+  }
+
+  if (is_space(lexer->lookahead)) {
+    if (!end) {
       lexer->result_symbol = T_TEXT;
       return true;
     }
