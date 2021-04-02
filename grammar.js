@@ -1,8 +1,8 @@
-const WHITE_SPACE = choice(' ', '\t', '\v', '\f');
+const WHITE_SPACE = choice(" ", "\t", "\v", "\f");
 const NEWLINE = /\r?\n/;
 
 module.exports = grammar({
-  name: 'comment',
+  name: "comment",
 
   externals: $ => [
     $.name,
@@ -18,7 +18,7 @@ module.exports = grammar({
     source: $ => repeat(
       choice(
         $.tag,
-        alias($._text, 'text'),
+        alias($._text, "text"),
       ),
     ),
 
