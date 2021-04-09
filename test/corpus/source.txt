@@ -1,6 +1,6 @@
-===========
+================================================================================
 Simple tags
-===========
+================================================================================
 
 TODO: something
 
@@ -18,20 +18,27 @@ NOTE:
 
 DEBUG: thís shoúld wórk with $weird$ symbols
 
----
+--------------------------------------------------------------------------------
 
 (source
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name)))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name)))
 
-==============
+================================================================================
 Decorated tags
-==============
+================================================================================
 
 TODO(stsewd): something
 
@@ -47,12 +54,24 @@ NOTE(a user):
 
 "NOTE (a user): this should work!"
 
----
+--------------------------------------------------------------------------------
 
 (source
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user)))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user)))
