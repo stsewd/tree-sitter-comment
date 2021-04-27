@@ -29,7 +29,7 @@ XXX:    extra white spaces.
 
 (NOTE: this works too).
 
-NOTE-BUG (stsewd): tags can be separated by `_`
+NOTE-BUG (stsewd): tags can be separated by `-`
 NOTE_BUG: or by `_`.
 ```
 
