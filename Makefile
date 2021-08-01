@@ -1,15 +1,15 @@
 build:
-	tree-sitter generate
+	npm run build
 
 test: build
-	tree-sitter test
+	npm run test
 
 serve: build
-	tree-sitter build-wasm
-	tree-sitter web-ui
+	npm run wasm
+	npm run web
 
 release: build format
-	tree-sitter build-wasm
+	npm run wasm
 
 format:
 	clang-format -i \

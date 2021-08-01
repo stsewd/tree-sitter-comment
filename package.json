@@ -6,8 +6,9 @@
   "scripts": {
     "test": "tree-sitter test",
     "build": "tree-sitter generate",
-    "wasm": "tree-sitter build-wasm",
-    "web": "tree-sitter web-ui"
+    "wasm": "tree-sitter build-wasm --docker",
+    "web": "tree-sitter web-ui",
+    "parse": "tree-sitter parse"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,6 @@
     "nan": "^2.14.2"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.19.4"
+    "tree-sitter-cli": "^0.20.0"
   }
 }
