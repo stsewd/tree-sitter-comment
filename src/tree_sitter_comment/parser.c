@@ -45,12 +45,19 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     if (lexer->lookahead != '(') {
       return parse_text(lexer, valid_symbols, false);
     }
+    lexer->advance(lexer, false);
+
     // Checking closure.
+    int user_length = 0;
     while (lexer->lookahead != ')') {
       if (is_newline(lexer->lookahead)) {
         return parse_text(lexer, valid_symbols, false);
       }
       lexer->advance(lexer, false);
+      user_length++;
+    }
+    if (user_length <= 0) {
+      return parse_text(lexer, valid_symbols, false);
     }
     lexer->advance(lexer, false);
   }

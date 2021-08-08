@@ -47,6 +47,8 @@ NOTE(a user):
 
 "NOTE (a user): this should work!"
 
+FIXME(): This isn't a valid tag (user is missing)
+
 ---
 
 (source
