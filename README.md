@@ -3,6 +3,8 @@
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for comment tags like `TODO:`, `FIXME(user):`, etc.
 Useful to be embedded inside comments.
 
+Check the playground at <https://stsewd.dev/tree-sitter-comment/>.
+
 ## Syntax
 
 Since comment tags aren't a programming language or have a standard,
