@@ -44,7 +44,9 @@
         <span id="update-time"></span>
       </div>
 
-      <input type="hidden" name="" value="comment" id="language-select">
+      <select id="language-select" style="display: none;">
+        <option value="comment" selected>Parser</option>
+      </select>
     </header>
 
     <main>
@@ -82,6 +84,10 @@
         const $codeEditor = document.querySelector('.CodeMirror');
         if ($codeEditor) {
           $codeEditor.CodeMirror.setValue(codeExample);
+          // The selected language gets cached from other
+          // playgrounds for some reason, force it to update.
+          let changeEvent = new Event('change');
+          document.getElementById('language-select').dispatchEvent(changeEvent);
           clearInterval(handle);
         }
       }, 500);
