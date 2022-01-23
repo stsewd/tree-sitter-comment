@@ -5,6 +5,6 @@
 
 bool parse_tagname(TSLexer* lexer, const bool* valid_symbols);
 bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end);
-bool tree_sitter_comment_scan(TSLexer* lexer, const bool* valid_symbols);
+bool parse(TSLexer* lexer, const bool* valid_symbols);
 
 #endif /* ifndef TREE_SITTER_COMMENT_PARSER_H */

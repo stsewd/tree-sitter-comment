@@ -112,7 +112,7 @@ bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
   return true;
 }
 
-bool tree_sitter_comment_parse(TSLexer* lexer, const bool* valid_symbols)
+bool parse(TSLexer* lexer, const bool* valid_symbols)
 {
   if (is_upper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
     return parse_tagname(lexer, valid_symbols);

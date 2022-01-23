@@ -31,5 +31,5 @@ bool tree_sitter_comment_external_scanner_scan(
     TSLexer* lexer,
     const bool* valid_symbols)
 {
-  return tree_sitter_comment_parse(lexer, valid_symbols);
+  return parse(lexer, valid_symbols);
 }
