@@ -86,8 +86,10 @@
           $codeEditor.CodeMirror.setValue(codeExample);
           // The selected language gets cached from other
           // playgrounds for some reason, force it to update.
+          let languageSelect = document.getElementById('language-select');
+          languageSelect.value = 'comment';
           let changeEvent = new Event('change');
-          document.getElementById('language-select').dispatchEvent(changeEvent);
+          languageSelect.dispatchEvent(changeEvent);
           clearInterval(handle);
         }
       }, 500);
