@@ -1,4 +1,4 @@
-#include "tree_sitter_comment/chars.h"
+#include "chars.h"
 
 bool is_upper(int32_t c)
 {
