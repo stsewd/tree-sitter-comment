@@ -1,7 +1,7 @@
-#include "tree_sitter_comment/parser.h"
+#include "parser.h"
 
-#include "tree_sitter_comment/chars.c"
-#include "tree_sitter_comment/tokens.h"
+#include "chars.c"
+#include "tokens.h"
 
 /// Parse the name of the tag.
 ///
