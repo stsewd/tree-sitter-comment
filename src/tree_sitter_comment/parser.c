@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "tree_sitter_comment/parser.h"
 
 #include "tree_sitter_comment/chars.h"
