@@ -4,11 +4,6 @@
 #include "tree_sitter_comment/chars.h"
 #include "tree_sitter_comment/tokens.h"
 
-/* #include "parser.h" */
-/**/
-/* #include "chars.c" */
-/* #include "tokens.h" */
-
 /// Parse the name of the tag.
 ///
 /// They can be of the form:
