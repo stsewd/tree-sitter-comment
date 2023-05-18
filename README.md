@@ -20,6 +20,26 @@ I have chosen to follow popular conventions for the syntax.
 If you think there are other popular conventions this syntax doesn't cover,
 feel free to open a issue.
 
+URLs are also identified and can be highlighted via the (url) token.
+
+The current list of URL schemes is:
+
+* dns
+* file
+* ftp
+* http
+* https
+* ipp
+* mailto
+* sms
+* tel
+* telnet
+* ssh
+* urn
+* ws
+* wss
+
+
 ## Examples
 
 ```
@@ -37,7 +57,6 @@ NOTE_BUG: or by `_`.
 
 ## TODO
 
-- Detect links?
 - Detect tags that start with `#` (like when linking to a PR)?
 
 ## Why C?

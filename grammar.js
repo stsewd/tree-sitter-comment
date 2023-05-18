@@ -7,6 +7,7 @@ module.exports = grammar({
   externals: $ => [
     $.name,
     $._text,
+    $._url,
   ],
 
   extras: $ => [
@@ -19,6 +20,7 @@ module.exports = grammar({
       choice(
         $.tag,
         alias($._text, "text"),
+        alias($._url, $.url),
       ),
     ),
 
@@ -34,7 +36,7 @@ module.exports = grammar({
       ')',
     ),
 
-    __newline: $ => NEWLINE,
-    __whitespace: $ => token(WHITE_SPACE),
+    __newline: _ => NEWLINE,
+    __whitespace: _ => token(WHITE_SPACE),
   },
 });

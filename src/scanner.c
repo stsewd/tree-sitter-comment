@@ -1,15 +1,16 @@
 #include <tree_sitter/parser.h>
 
-#include "tree_sitter_comment/parser.c"
+#include "tree_sitter_comment/scanner.c"
 #include "tree_sitter_comment/tokens.h"
 
 void* tree_sitter_comment_external_scanner_create()
 {
-  return NULL;
+  return new_comment_scanner();
 }
 
 void tree_sitter_comment_external_scanner_destroy(void* payload)
 {
+  destroy_comment_scanner(payload);
 }
 
 unsigned tree_sitter_comment_external_scanner_serialize(
@@ -31,5 +32,10 @@ bool tree_sitter_comment_external_scanner_scan(
     TSLexer* lexer,
     const bool* valid_symbols)
 {
-  return parse(lexer, valid_symbols);
+  CommentScanner* scanner = (CommentScanner*)payload;
+  scanner->lexer = lexer;
+  scanner->valid_symbols = valid_symbols;
+  scanner->lookahead = lexer->lookahead;
+  scanner->previous = lexer->lookahead;
+  return scanner->scan(scanner);
 }

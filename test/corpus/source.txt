@@ -18,6 +18,12 @@ NOTE:
 
 DEBUG: thís shoúld wórk with $weird$ symbols
 
+https://github.com/
+
+foo "<https://github.com/>" bar
+
+TODO: https://user:pass@github.com/org/repo/?foo=baz
+
 ---
 
 (source
@@ -27,7 +33,11 @@ DEBUG: thís shoúld wórk with $weird$ symbols
   (tag (name))
   (tag (name))
   (tag (name))
-  (tag (name)))
+  (tag (name))
+  (url)
+  (url)
+  (tag (name))
+  (url))
 
 ==============
 Decorated tags

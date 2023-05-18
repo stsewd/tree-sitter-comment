@@ -10,6 +10,10 @@
         {
           "type": "tag",
           "named": true
+        },
+        {
+          "type": "url",
+          "named": true
         }
       ]
     }
@@ -52,6 +56,10 @@
   {
     "type": "text",
     "named": false
+  },
+  {
+    "type": "url",
+    "named": true
   },
   {
     "type": "user",

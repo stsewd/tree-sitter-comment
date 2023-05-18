@@ -5,13 +5,13 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
-#define LANGUAGE_VERSION 13
+#define LANGUAGE_VERSION 14
 #define STATE_COUNT 12
 #define LARGE_STATE_COUNT 4
-#define SYMBOL_COUNT 13
+#define SYMBOL_COUNT 14
 #define ALIAS_COUNT 0
-#define TOKEN_COUNT 9
-#define EXTERNAL_TOKEN_COUNT 2
+#define TOKEN_COUNT 10
+#define EXTERNAL_TOKEN_COUNT 3
 #define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 3
 #define PRODUCTION_ID_COUNT 1
@@ -25,10 +25,11 @@ enum {
   sym___whitespace = 6,
   sym_name = 7,
   sym__text = 8,
-  sym_source = 9,
-  sym_tag = 10,
-  sym__user = 11,
-  aux_sym_source_repeat1 = 12,
+  sym__url = 9,
+  sym_source = 10,
+  sym_tag = 11,
+  sym__user = 12,
+  aux_sym_source_repeat1 = 13,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -41,6 +42,7 @@ static const char * const ts_symbol_names[] = {
   [sym___whitespace] = "__whitespace",
   [sym_name] = "name",
   [sym__text] = "text",
+  [sym__url] = "url",
   [sym_source] = "source",
   [sym_tag] = "tag",
   [sym__user] = "_user",
@@ -57,6 +59,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym___whitespace] = sym___whitespace,
   [sym_name] = sym_name,
   [sym__text] = sym__text,
+  [sym__url] = sym__url,
   [sym_source] = sym_source,
   [sym_tag] = sym_tag,
   [sym__user] = sym__user,
@@ -100,6 +103,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
+  [sym__url] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_source] = {
     .visible = true,
     .named = true,
@@ -124,6 +131,21 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
 
 static const uint16_t ts_non_terminal_alias_map[] = {
   0,
+};
+
+static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
+  [0] = 0,
+  [1] = 1,
+  [2] = 2,
+  [3] = 3,
+  [4] = 4,
+  [5] = 5,
+  [6] = 6,
+  [7] = 7,
+  [8] = 8,
+  [9] = 9,
+  [10] = 10,
+  [11] = 11,
 };
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -197,9 +219,9 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [1] = {.lex_state = 0, .external_lex_state = 1},
   [2] = {.lex_state = 0, .external_lex_state = 1},
   [3] = {.lex_state = 0, .external_lex_state = 1},
-  [4] = {.lex_state = 0},
+  [4] = {.lex_state = 0, .external_lex_state = 1},
   [5] = {.lex_state = 0, .external_lex_state = 1},
-  [6] = {.lex_state = 0, .external_lex_state = 1},
+  [6] = {.lex_state = 0},
   [7] = {.lex_state = 0},
   [8] = {.lex_state = 2},
   [9] = {.lex_state = 0},
@@ -210,17 +232,20 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
 enum {
   ts_external_token_name = 0,
   ts_external_token__text = 1,
+  ts_external_token__url = 2,
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token_name] = sym_name,
   [ts_external_token__text] = sym__text,
+  [ts_external_token__url] = sym__url,
 };
 
 static const bool ts_external_scanner_states[2][EXTERNAL_TOKEN_COUNT] = {
   [1] = {
     [ts_external_token_name] = true,
     [ts_external_token__text] = true,
+    [ts_external_token__url] = true,
   },
 };
 
@@ -234,6 +259,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym___whitespace] = ACTIONS(3),
     [sym_name] = ACTIONS(1),
     [sym__text] = ACTIONS(1),
+    [sym__url] = ACTIONS(1),
   },
   [1] = {
     [sym_source] = STATE(7),
@@ -244,6 +270,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym___whitespace] = ACTIONS(3),
     [sym_name] = ACTIONS(7),
     [sym__text] = ACTIONS(9),
+    [sym__url] = ACTIONS(9),
   },
   [2] = {
     [sym_tag] = STATE(3),
@@ -253,6 +280,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym___whitespace] = ACTIONS(3),
     [sym_name] = ACTIONS(7),
     [sym__text] = ACTIONS(13),
+    [sym__url] = ACTIONS(13),
   },
   [3] = {
     [sym_tag] = STATE(3),
@@ -262,61 +290,64 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym___whitespace] = ACTIONS(3),
     [sym_name] = ACTIONS(17),
     [sym__text] = ACTIONS(20),
+    [sym__url] = ACTIONS(20),
   },
 };
 
 static const uint16_t ts_small_parse_table[] = {
-  [0] = 4,
-    ACTIONS(23), 1,
+  [0] = 2,
+    ACTIONS(3), 2,
+      sym___newline,
+      sym___whitespace,
+    ACTIONS(23), 4,
+      sym_name,
+      sym__text,
+      sym__url,
+      ts_builtin_sym_end,
+  [11] = 2,
+    ACTIONS(3), 2,
+      sym___newline,
+      sym___whitespace,
+    ACTIONS(25), 4,
+      sym_name,
+      sym__text,
+      sym__url,
+      ts_builtin_sym_end,
+  [22] = 4,
+    ACTIONS(27), 1,
       anon_sym_COLON,
-    ACTIONS(25), 1,
+    ACTIONS(29), 1,
       anon_sym_LPAREN,
     STATE(9), 1,
       sym__user,
     ACTIONS(3), 2,
       sym___newline,
       sym___whitespace,
-  [14] = 2,
-    ACTIONS(3), 2,
-      sym___newline,
-      sym___whitespace,
-    ACTIONS(27), 3,
-      sym_name,
-      sym__text,
-      ts_builtin_sym_end,
-  [24] = 2,
-    ACTIONS(3), 2,
-      sym___newline,
-      sym___whitespace,
-    ACTIONS(29), 3,
-      sym_name,
-      sym__text,
-      ts_builtin_sym_end,
-  [34] = 2,
+  [36] = 2,
     ACTIONS(31), 1,
       ts_builtin_sym_end,
     ACTIONS(3), 2,
       sym___newline,
       sym___whitespace,
-  [42] = 2,
+  [44] = 2,
     ACTIONS(33), 1,
       aux_sym__user_token1,
     ACTIONS(35), 2,
       sym___newline,
       sym___whitespace,
-  [50] = 2,
+  [52] = 2,
     ACTIONS(37), 1,
       anon_sym_COLON,
     ACTIONS(3), 2,
       sym___newline,
       sym___whitespace,
-  [58] = 2,
+  [60] = 2,
     ACTIONS(39), 1,
       anon_sym_RPAREN,
     ACTIONS(3), 2,
       sym___newline,
       sym___whitespace,
-  [66] = 2,
+  [68] = 2,
     ACTIONS(41), 1,
       anon_sym_COLON,
     ACTIONS(3), 2,
@@ -326,13 +357,13 @@ static const uint16_t ts_small_parse_table[] = {
 
 static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(4)] = 0,
-  [SMALL_STATE(5)] = 14,
-  [SMALL_STATE(6)] = 24,
-  [SMALL_STATE(7)] = 34,
-  [SMALL_STATE(8)] = 42,
-  [SMALL_STATE(9)] = 50,
-  [SMALL_STATE(10)] = 58,
-  [SMALL_STATE(11)] = 66,
+  [SMALL_STATE(5)] = 11,
+  [SMALL_STATE(6)] = 22,
+  [SMALL_STATE(7)] = 36,
+  [SMALL_STATE(8)] = 44,
+  [SMALL_STATE(9)] = 52,
+  [SMALL_STATE(10)] = 60,
+  [SMALL_STATE(11)] = 68,
 };
 
 static const TSParseActionEntry ts_parse_actions[] = {
@@ -340,21 +371,21 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1] = {.entry = {.count = 1, .reusable = false}}, RECOVER(),
   [3] = {.entry = {.count = 1, .reusable = true}}, SHIFT_EXTRA(),
   [5] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_source, 0),
-  [7] = {.entry = {.count = 1, .reusable = true}}, SHIFT(4),
+  [7] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
   [9] = {.entry = {.count = 1, .reusable = true}}, SHIFT(2),
   [11] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_source, 1),
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(3),
   [15] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_source_repeat1, 2),
-  [17] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_repeat1, 2), SHIFT_REPEAT(4),
+  [17] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_repeat1, 2), SHIFT_REPEAT(6),
   [20] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_repeat1, 2), SHIFT_REPEAT(3),
-  [23] = {.entry = {.count = 1, .reusable = true}}, SHIFT(5),
-  [25] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
-  [27] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 2),
-  [29] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 3),
+  [23] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 2),
+  [25] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tag, 3),
+  [27] = {.entry = {.count = 1, .reusable = true}}, SHIFT(4),
+  [29] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
   [31] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
   [33] = {.entry = {.count = 1, .reusable = true}}, SHIFT(10),
   [35] = {.entry = {.count = 1, .reusable = false}}, SHIFT_EXTRA(),
-  [37] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
+  [37] = {.entry = {.count = 1, .reusable = true}}, SHIFT(5),
   [39] = {.entry = {.count = 1, .reusable = true}}, SHIFT(11),
   [41] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__user, 3),
 };
@@ -404,6 +435,7 @@ extern const TSLanguage *tree_sitter_comment(void) {
       tree_sitter_comment_external_scanner_serialize,
       tree_sitter_comment_external_scanner_deserialize,
     },
+    .primary_state_ids = ts_primary_state_ids,
   };
   return &language;
 }

@@ -3,8 +3,12 @@
 
 #include <tree_sitter/parser.h>
 
-bool parse_tagname(TSLexer* lexer, const bool* valid_symbols);
-bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end);
-bool parse(TSLexer* lexer, const bool* valid_symbols);
+#include "tree_sitter_comment/scanner.h"
+#include "tree_sitter_comment/tokens.h"
+
+bool parse_tagname(CommentScanner* scanner);
+bool parse_url(CommentScanner* scanner);
+bool parse_inner_url(CommentScanner* scanner);
+bool parse_text(CommentScanner* scanner, bool end);
 
 #endif /* ifndef TREE_SITTER_COMMENT_PARSER_H */

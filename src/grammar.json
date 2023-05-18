@@ -18,6 +18,15 @@
             },
             "named": false,
             "value": "text"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_url"
+            },
+            "named": true,
+            "value": "url"
           }
         ]
       }
@@ -118,6 +127,10 @@
     {
       "type": "SYMBOL",
       "name": "_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_url"
     }
   ],
   "inline": [],

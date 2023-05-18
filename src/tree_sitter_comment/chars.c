@@ -1,17 +1,35 @@
+#include <string.h>
 #include "chars.h"
-
-bool is_upper(int32_t c)
-{
-  const int32_t upper = 65;
-  const int32_t lower = 90;
-  return c >= upper && c <= lower;
-}
 
 bool is_digit(int32_t c)
 {
   const int32_t upper = 48;
   const int32_t lower = 57;
   return c >= upper && c <= lower;
+}
+
+bool is_abc_upper(int32_t c)
+{
+  const int32_t upper = 65;
+  const int32_t lower = 90;
+  return c >= upper && c <= lower;
+}
+
+bool is_abc_lower(int32_t c)
+{
+  const int32_t upper = 97;
+  const int32_t lower = 122;
+  return c >= upper && c <= lower;
+}
+
+bool is_abc(int32_t c)
+{
+  return is_abc_lower(c) || is_abc_upper(c);
+}
+
+bool is_alphanumeric(int32_t c)
+{
+  return is_abc(c) || is_digit(c);
 }
 
 bool is_newline(int32_t c)
@@ -114,6 +132,55 @@ bool is_end_char(int32_t c)
   const int length = sizeof(valid_chars) / sizeof(int32_t);
   for (int i = 0; i < length; i++) {
     if (c == valid_chars[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool is_known_schema(char* string, unsigned string_len)
+{
+  char* valid_schemas[] = {
+    "dns",
+    "file",
+    "ftp",
+    "http",
+    "https",
+    "ipp",
+    "mailto",
+    "sms",
+    "tel",
+    "telnet",
+    "ssh",
+    "urn",
+    "ws",
+    "wss",
+  };
+
+  const int length = sizeof(valid_schemas) / sizeof(char*);
+  for (int i = 0; i < length; i++) {
+    if (string_len != strlen(valid_schemas[i])) {
+      continue;
+    }
+    int result = memcmp(string, valid_schemas[i], string_len);
+    if (result == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool is_invalid_uri_char(int32_t c)
+{
+  const int32_t invalid_chars[] = {
+    '^',
+    '}',
+    '{',
+    '\\',
+  };
+  const int length = sizeof(invalid_chars) / sizeof(int32_t);
+  for (int i = 0; i < length; i++) {
+    if (c == invalid_chars[i]) {
       return true;
     }
   }

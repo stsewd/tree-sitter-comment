@@ -4,6 +4,7 @@
 enum TokenType {
   T_TAGNAME,
   T_TEXT,
+  T_URL,
 };
 
 #endif /* ifndef TREE_SITTER_COMMENT_TOKENS_H */
