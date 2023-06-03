@@ -69,33 +69,103 @@
         }
       ]
     },
+    "_text": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_stop_char"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\r\\n\\s/'\"<\\(\\[\\{\\.,:;!\\?\\\\\\}\\]\\)>-]+"
+        }
+      ]
+    },
+    "_stop_char": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "/"
+        },
+        {
+          "type": "STRING",
+          "value": "'"
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        },
+        {
+          "type": "STRING",
+          "value": "!"
+        },
+        {
+          "type": "STRING",
+          "value": "?"
+        },
+        {
+          "type": "STRING",
+          "value": "\\"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": "-"
+        }
+      ]
+    },
     "__newline": {
       "type": "PATTERN",
       "value": "\\r?\\n"
-    },
-    "__whitespace": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": " "
-          },
-          {
-            "type": "STRING",
-            "value": "\t"
-          },
-          {
-            "type": "STRING",
-            "value": "\u000b"
-          },
-          {
-            "type": "STRING",
-            "value": "\f"
-          }
-        ]
-      }
     }
   },
   "extras": [
@@ -104,8 +174,8 @@
       "name": "__newline"
     },
     {
-      "type": "SYMBOL",
-      "name": "__whitespace"
+      "type": "PATTERN",
+      "value": "\\s"
     }
   ],
   "conflicts": [],
@@ -117,7 +187,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_text"
+      "name": "invalid_token"
     }
   ],
   "inline": [],

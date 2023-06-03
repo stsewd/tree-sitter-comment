@@ -1,11 +1,14 @@
 [package]
 name = "tree-sitter-comment"
-description = "comment grammar for the tree-sitter parsing library"
-version = "0.0.1"
+description = "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library"
+version = "0.1.0"
 keywords = ["incremental", "parsing", "comment"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/stsewd/tree-sitter-comment"
+homepage = "https://stsewd.dev/tree-sitter-comment/"
 edition = "2018"
+license = "MIT"
+readme = "README.md"
 
 build = "bindings/rust/build.rs"
 include = [
@@ -19,7 +22,7 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "0.19.2"
+tree-sitter = "0.20"
 
 [build-dependencies]
 cc = "1.0"
