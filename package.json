@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-comment",
-  "version": "0.0.1",
-  "description": "Grammar for code tags like TODO:, FIXME(user):, etc.",
+  "version": "0.1.0",
+  "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
   "main": "bindings/node",
   "scripts": {
     "test": "tree-sitter test",

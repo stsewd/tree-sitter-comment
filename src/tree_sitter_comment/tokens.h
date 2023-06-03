@@ -3,7 +3,7 @@
 
 enum TokenType {
   T_TAGNAME,
-  T_TEXT,
+  T_INVALID_TOKEN,
 };
 
 #endif /* ifndef TREE_SITTER_COMMENT_TOKENS_H */

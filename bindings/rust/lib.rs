@@ -6,7 +6,7 @@
 //! ```
 //! let code = "";
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_javascript::language()).expect("Error loading comment grammar");
+//! parser.set_language(tree_sitter_comment::language()).expect("Error loading comment grammar");
 //! let tree = parser.parse(code, None).unwrap();
 //! ```
 //!

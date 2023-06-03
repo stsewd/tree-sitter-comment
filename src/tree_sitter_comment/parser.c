@@ -2,6 +2,7 @@
 
 #include "chars.c"
 #include "tokens.h"
+#include <stdbool.h>
 
 /// Parse the name of the tag.
 ///
@@ -26,11 +27,13 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     previous = lexer->lookahead;
     lexer->advance(lexer, false);
   }
+  // The tag name ends here.
+  // But we keep parsing to see if it's a valid tag name.
   lexer->mark_end(lexer);
 
   // It can't end with an internal char.
   if (is_internal_char(previous)) {
-    return parse_text(lexer, valid_symbols, false);
+    return false;
   }
 
   // For the user component this is `\s*(`.
@@ -43,7 +46,7 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     }
     // Checking aperture.
     if (lexer->lookahead != '(') {
-      return parse_text(lexer, valid_symbols, false);
+      return false;
     }
     lexer->advance(lexer, false);
 
@@ -51,74 +54,43 @@ bool parse_tagname(TSLexer* lexer, const bool* valid_symbols)
     int user_length = 0;
     while (lexer->lookahead != ')') {
       if (is_newline(lexer->lookahead)) {
-        return parse_text(lexer, valid_symbols, false);
+        return false;
       }
       lexer->advance(lexer, false);
       user_length++;
     }
     if (user_length <= 0) {
-      return parse_text(lexer, valid_symbols, false);
+      return false;
     }
     lexer->advance(lexer, false);
   }
 
   // It should end with `:`...
   if (lexer->lookahead != ':') {
-    return parse_text(lexer, valid_symbols, false);
+    return false;
   }
 
   // ... and be followed by one space.
   lexer->advance(lexer, false);
   if (!is_space(lexer->lookahead)) {
-    return parse_text(lexer, valid_symbols, false);
+    return false;
   }
 
   lexer->result_symbol = T_TAGNAME;
   return true;
 }
 
-/// Parse normal text.
-///
-/// Text nodes are separated by white spaces or an start char like `(`
-bool parse_text(TSLexer* lexer, const bool* valid_symbols, bool end)
-{
-  if (!valid_symbols[T_TEXT]) {
-    return false;
-  }
-
-  if (is_space(lexer->lookahead)) {
-    if (!end) {
-      lexer->result_symbol = T_TEXT;
-      return true;
-    }
-    return false;
-  }
-
-  if (is_start_char(lexer->lookahead) || is_end_char(lexer->lookahead)) {
-    lexer->advance(lexer, false);
-  } else {
-    while (!is_space(lexer->lookahead)) {
-      if (is_start_char(lexer->lookahead) || is_end_char(lexer->lookahead)) {
-        break;
-      }
-      lexer->advance(lexer, false);
-    }
-  }
-
-  if (end) {
-    lexer->mark_end(lexer);
-  }
-  lexer->result_symbol = T_TEXT;
-  return true;
-}
-
 bool parse(TSLexer* lexer, const bool* valid_symbols)
 {
+  // If all valid symbols are true, tree-sitter is in correction mode.
+  // We don't want to parse anything in that case.
+  if (valid_symbols[T_INVALID_TOKEN]) {
+    return false;
+  }
+
   if (is_upper(lexer->lookahead) && valid_symbols[T_TAGNAME]) {
     return parse_tagname(lexer, valid_symbols);
   }
-  if (!is_space(lexer->lookahead) && valid_symbols[T_TEXT]) {
-    return parse_text(lexer, valid_symbols, true);
-  }
+
   return false;
 }
