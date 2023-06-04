@@ -92,7 +92,7 @@ URI: https://user:pass@example.com/org/repo/?foo=baz
 
 (https://example.com/foo/bar/)
 
-URI(me): (https://example.com/foo/bar/?foo=bar)
+URI(me): (https://github.com/stsewd/?foo=bar#baz)
 
 --------------------------------------------------------------------------------
 
@@ -107,4 +107,8 @@ URI(me): (https://example.com/foo/bar/?foo=bar)
   (tag
     (name))
   (uri)
+  (uri)
+  (tag
+    (name)
+    (user))
   (uri))
