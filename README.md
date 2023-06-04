@@ -17,7 +17,7 @@ I have chosen to follow popular conventions for the syntax.
 * Comment tags can contain:
   - Upper case ascii letters
   - Numbers (can't start with one)
-  - `-`, `_` (they can't start or end whit these characters)
+  - `-`, `_` (they can't start or end with these characters)
 * Optionally can have an user linked to the tag inside parentheses `()`
 * The name must be followed by `:` and a whitespace
 
