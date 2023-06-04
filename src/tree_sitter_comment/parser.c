@@ -3,6 +3,7 @@
 #include "chars.c"
 #include "tokens.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 /// Parse the name of the tag.
 ///

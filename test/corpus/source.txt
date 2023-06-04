@@ -1,6 +1,6 @@
-===========
+================================================================================
 Simple tags
-===========
+================================================================================
 
 TODO: something
 
@@ -18,20 +18,27 @@ NOTE:
 
 DEBUG: thís shoúld wórk with $weird$ symbols
 
----
+--------------------------------------------------------------------------------
 
 (source
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name))
-  (tag (name)))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name)))
 
-==============
+================================================================================
 Decorated tags
-==============
+================================================================================
 
 TODO(stsewd): something
 
@@ -49,12 +56,55 @@ NOTE(a user):
 
 FIXME(): This isn't a valid tag (user is missing)
 
----
+--------------------------------------------------------------------------------
 
 (source
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user))
-  (tag (name) (user)))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user))
+  (tag
+    (name)
+    (user)))
+
+================================================================================
+URIS
+================================================================================
+
+TODO: http://example.com
+
+TODO: https://example.com
+
+Something "http://example.com"
+
+URI: https://user:pass@example.com/org/repo/?foo=baz
+
+(https://example.com/foo/bar/)
+
+URI(me): (https://example.com/foo/bar/?foo=bar)
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name))
+  (uri)
+  (tag
+    (name))
+  (uri)
+  (uri)
+  (tag
+    (name))
+  (uri)
+  (uri))
