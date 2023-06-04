@@ -1,5 +1,7 @@
 # tree-sitter-comment
 
+[![CI](https://github.com/stsewd/tree-sitter-comment/workflows/CI/badge.svg)](https://github.com/stsewd/tree-sitter-comment/actions?query=workflow%3ACI+branch%3Amaster)
+
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for comment tags like `TODO:`, `FIXME(user):`, etc.
 Useful to be embedded inside comments.
 
@@ -78,6 +80,12 @@ that means it works great for grammars that don't require backtracking,
 or to keep a state for whitespaces (like indentation).
 For these reasons, parsing _languages_ that need to keep a state or falling back to a general token,
 it requires some manual parsing in C.
+
+## Projects using this grammar
+
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [helix](https://github.com/helix-editor/helix)
+- Yours?
 
 ## Other grammars
 
