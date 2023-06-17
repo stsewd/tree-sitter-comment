@@ -73,6 +73,15 @@ but you can match it with this query:
  (#match? @issue "^[0-9]+$"))
 ```
 
+### I'm using Neovim and don't see all tags highlighted
+
+To avoid false positives, Neovim doesn't highlight all tags,
+but a list of specific ones,
+see the list at [`queries/comment/highlights.scm`](https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/comment/highlights.scm).
+
+If you want your tag highlighted, you can extend the query locally, see `:h treesitter-query`.
+Or if you think it's very common, you can suggest it [upstream](https://github.com/nvim-treesitter/nvim-treesitter).
+
 ## Why C?
 
 Tree-sitter is a [LR parser](https://en.wikipedia.org/wiki/LR_parser) for context-free grammars,
