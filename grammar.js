@@ -12,8 +12,6 @@ const END_CHARS = [
   "]",
   ")",
   ">",
-  // This must be last, so that it isn't interpreted as a range.
-  "-",
 ];
 
 const STOP_CHARS = [
