@@ -94,7 +94,7 @@ module.exports = grammar({
 function get_uri_regex() {
   let end_chars = escapeRegExp(END_CHARS.join(""));
   return new RegExp(
-    `https?://([^\\s${end_chars}]|[${end_chars}][a-zA-Z0-9]+)*[^\\s${end_chars}]`
+    `https?://([^\\s${end_chars}]|[${end_chars}][a-zA-Z0-9])+`
   );
 }
 
