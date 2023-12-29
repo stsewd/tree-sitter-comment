@@ -40,41 +40,32 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  conflicts: ($) => [
-    [$._simple_tag, $._tag_with_annotation],
+  externals: ($) => [
+    $._tag_name,
+    $._invalid_token
   ],
 
   rules: {
     source: ($) => repeat(
       choice(
+        // Explicitly end with a "stop" character to help TS desabmiguate from a normal tag.
+        seq(alias($.simple_tag, $.tag), choice($._text, /\s/)),
         $.tag,
         $.uri,
         $._text,
       ),
     ),
 
-    tag: ($) => choice(
-      $._simple_tag,
-      $._normal_tag,
-      $._tag_with_annotation,
-    ),
+    simple_tag: ($) => alias($._simple_tag_name, $.name),
+    _simple_tag_name: ($) => /[A-Z]([A-Z0-9_-]*[A-Z0-9])?/,
 
-    _simple_tag: ($) => alias($._tag_name, $.name),
-
-    _normal_tag: ($) => seq(
+    tag: ($) => seq(
       alias($._tag_name, $.name),
-      token.immediate(":"),
+      optional($._tag_annotation),
+      ":",
     ),
 
-    _tag_with_annotation: ($) => seq(
-      alias($._tag_name, $.name),
-      "(",
-      optional(alias(/[^()]+/, $.annotation)),
-      ")",
-      token.immediate(":"),
-    ),
-
-    _tag_name: ($) => /[A-Z]([A-Z0-9_-]*[A-Z0-9])?/,
+    _tag_annotation: ($) => seq("(", alias(/[^()]+/, $.annotation), ")"),
 
     // This token needs to be single regex, otherwise a partial match will result in an error.
     uri: ($) => get_uri_regex(),

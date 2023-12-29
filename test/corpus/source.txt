@@ -104,7 +104,7 @@ XXX (monday): fix something else.
 
 TODO(@todo):    extra white spaces.
 
-TAG(tag):missing space
+NO_ANNOTATED_TAG(tag):missing space
 
 (TODO (someone): I'm inside parentheses)
 
@@ -114,8 +114,8 @@ NOTE(a user):
 
 FIXME(): The annotation is missing, but it's a valid tag
 
-Should this even be valid? FIXME (
-  still valid as an annotated tag!
+This isn't a valid annotated tag FIXME (
+  new line!
 ):
 
 --------------------------------------------------------------------------------
@@ -131,8 +131,7 @@ Should this even be valid? FIXME (
     (name)
     (annotation))
   (tag
-    (name)
-    (annotation))
+    (name))
   (tag
     (name)
     (annotation))
@@ -147,8 +146,7 @@ Should this even be valid? FIXME (
   (tag
     (name))
   (tag
-    (name)
-    (annotation)))
+    (name)))
 
 ================================================================================
 Invalid tags

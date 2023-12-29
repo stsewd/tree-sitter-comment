@@ -8,9 +8,15 @@ serve: build
 	npm run wasm
 	npm run web
 
-release: build
+release: build format
 	npm run wasm
 	# GitHub pages doesn't like symbolic links
 	cp tree-sitter-comment.wasm docs/js/tree-sitter-comment.wasm
 
-.PHONY: build test serve release
+format:
+	clang-format -i \
+	  --style="{BasedOnStyle: webkit, IndentWidth: 2}" \
+	  src/scanner.c \
+	  src/tree_sitter_comment/*
+
+.PHONY: build test serve release format

@@ -7,6 +7,33 @@
         "type": "CHOICE",
         "members": [
           {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "simple_tag"
+                },
+                "named": true,
+                "value": "tag"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_text"
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "\\s"
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "type": "SYMBOL",
             "name": "tag"
           },
@@ -21,54 +48,20 @@
         ]
       }
     },
-    "tag": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_simple_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_normal_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_tag_with_annotation"
-        }
-      ]
-    },
-    "_simple_tag": {
+    "simple_tag": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
-        "name": "_tag_name"
+        "name": "_simple_tag_name"
       },
       "named": true,
       "value": "name"
     },
-    "_normal_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_tag_name"
-          },
-          "named": true,
-          "value": "name"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": ":"
-          }
-        }
-      ]
+    "_simple_tag_name": {
+      "type": "PATTERN",
+      "value": "[A-Z]([A-Z0-9_-]*[A-Z0-9])?"
     },
-    "_tag_with_annotation": {
+    "tag": {
       "type": "SEQ",
       "members": [
         {
@@ -79,22 +72,13 @@
           },
           "named": true,
           "value": "name"
-        },
-        {
-          "type": "STRING",
-          "value": "("
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "PATTERN",
-                "value": "[^()]+"
-              },
-              "named": true,
-              "value": "annotation"
+              "type": "SYMBOL",
+              "name": "_tag_annotation"
             },
             {
               "type": "BLANK"
@@ -103,20 +87,31 @@
         },
         {
           "type": "STRING",
-          "value": ")"
-        },
-        {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "STRING",
-            "value": ":"
-          }
+          "value": ":"
         }
       ]
     },
-    "_tag_name": {
-      "type": "PATTERN",
-      "value": "[A-Z]([A-Z0-9_-]*[A-Z0-9])?"
+    "_tag_annotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^()]+"
+          },
+          "named": true,
+          "value": "annotation"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
     },
     "uri": {
       "type": "PATTERN",
@@ -280,14 +275,18 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [
-    [
-      "_simple_tag",
-      "_tag_with_annotation"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_tag_name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_invalid_token"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }
