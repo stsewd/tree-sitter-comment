@@ -2,15 +2,71 @@
 Simple tags
 ================================================================================
 
+TODO
+
+XXX XX X
+
+(T)
+
+A 'A' "A"
+
+:B, "B", 'B, B
+
+I'm a tag too, SADLY.
+
+this is VALID(
+
+this is a simple TAG :
+
+--------------------------------------------------------------------------------
+
+(source
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name))
+  (tag
+    (name)))
+
+================================================================================
+Normal tags
+================================================================================
+
 TODO: something
 
 XXX: fix something else.
 
 TODO:    extra white spaces.
 
-NOTAG:missing space
+TAG:missing space
 
-(TODO: I'm inside parentheses)
+(TODO: i'm inside parentheses)
 
 NOTE:
 
@@ -34,10 +90,12 @@ DEBUG: thís shoúld wórk with $weird$ symbols
   (tag
     (name))
   (tag
+    (name))
+  (tag
     (name)))
 
 ================================================================================
-Decorated tags
+Annotated tags
 ================================================================================
 
 TODO(stsewd): something
@@ -46,7 +104,7 @@ XXX (monday): fix something else.
 
 TODO(@todo):    extra white spaces.
 
-NOTAG(tag):missing space
+TAG(tag):missing space
 
 (TODO (someone): I'm inside parentheses)
 
@@ -54,29 +112,61 @@ NOTE(a user):
 
 "NOTE (a user): this should work!"
 
-FIXME(): This isn't a valid tag (user is missing)
+FIXME(): The annotation is missing, but it's a valid tag
+
+Should this even be valid? FIXME (
+  still valid as an annotated tag!
+):
 
 --------------------------------------------------------------------------------
 
 (source
   (tag
     (name)
-    (user))
+    (annotation))
   (tag
     (name)
-    (user))
+    (annotation))
   (tag
     (name)
-    (user))
+    (annotation))
   (tag
     (name)
-    (user))
+    (annotation))
   (tag
     (name)
-    (user))
+    (annotation))
+  (tag
+    (name))
   (tag
     (name)
-    (user)))
+    (annotation))
+  (tag
+    (name)
+    (annotation))
+  (tag
+    (name))
+  (tag
+    (name)
+    (annotation)))
+
+================================================================================
+Invalid tags
+================================================================================
+
+no tags here
+
+No tags here
+
+NoTagsHere
+
+nOtaGShEre
+
+1NVALID (starts with a number)
+
+--------------------------------------------------------------------------------
+
+(source)
 
 ================================================================================
 URIS
@@ -112,6 +202,6 @@ https://github.com/stsewd/tree-sitter-rst#1.1
   (uri)
   (tag
     (name)
-    (user))
+    (annotation))
   (uri)
   (uri))

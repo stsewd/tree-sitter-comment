@@ -40,34 +40,41 @@ const STOP_CHARS = [
 module.exports = grammar({
   name: "comment",
 
-  externals: ($) => [
-    $.name,
-    $.invalid_token
+  conflicts: ($) => [
+    [$._simple_tag, $._tag_with_annotation],
   ],
 
   rules: {
     source: ($) => repeat(
       choice(
         $.tag,
-        $._full_uri,
-        alias($._text, "text"),
+        $.uri,
+        $._text,
       ),
     ),
 
-    tag: ($) => seq(
-      $.name,
-      optional($._user),
-      ":",
+    tag: ($) => choice(
+      $._simple_tag,
+      $._normal_tag,
+      $._tag_with_annotation,
     ),
 
-    _user: ($) => seq(
+    _simple_tag: ($) => alias($._tag_name, $.name),
+
+    _normal_tag: ($) => seq(
+      alias($._tag_name, $.name),
+      token.immediate(":"),
+    ),
+
+    _tag_with_annotation: ($) => seq(
+      alias($._tag_name, $.name),
       "(",
-      alias(/[^()]+/, $.user),
+      optional(alias(/[^()]+/, $.annotation)),
       ")",
+      token.immediate(":"),
     ),
 
-    // This token is split into two parts so the end character isn't included in the URI itself.
-    _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
+    _tag_name: ($) => /[A-Z]([A-Z0-9_-]*[A-Z0-9])?/,
 
     // This token needs to be single regex, otherwise a partial match will result in an error.
     uri: ($) => get_uri_regex(),

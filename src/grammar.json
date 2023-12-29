@@ -12,33 +12,89 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_full_uri"
+            "name": "uri"
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_text"
-            },
-            "named": false,
-            "value": "text"
+            "type": "SYMBOL",
+            "name": "_text"
           }
         ]
       }
     },
     "tag": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "name"
+          "name": "_simple_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_normal_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tag_with_annotation"
+        }
+      ]
+    },
+    "_simple_tag": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_tag_name"
+      },
+      "named": true,
+      "value": "name"
+    },
+    "_normal_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_tag_name"
+          },
+          "named": true,
+          "value": "name"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          }
+        }
+      ]
+    },
+    "_tag_with_annotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_tag_name"
+          },
+          "named": true,
+          "value": "name"
+        },
+        {
+          "type": "STRING",
+          "value": "("
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_user"
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^()]+"
+              },
+              "named": true,
+              "value": "annotation"
             },
             {
               "type": "BLANK"
@@ -47,58 +103,20 @@
         },
         {
           "type": "STRING",
-          "value": ":"
-        }
-      ]
-    },
-    "_user": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^()]+"
-          },
-          "named": true,
-          "value": "user"
-        },
-        {
-          "type": "STRING",
           "value": ")"
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": ":"
+          }
         }
       ]
     },
-    "_full_uri": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "uri"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_end_char"
-              },
-              "named": false,
-              "value": "text"
-            },
-            {
-              "type": "PATTERN",
-              "value": "\\s"
-            }
-          ]
-        }
-      ]
+    "_tag_name": {
+      "type": "PATTERN",
+      "value": "[A-Z]([A-Z0-9_-]*[A-Z0-9])?"
     },
     "uri": {
       "type": "PATTERN",
@@ -262,18 +280,14 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [],
-  "precedences": [],
-  "externals": [
-    {
-      "type": "SYMBOL",
-      "name": "name"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "invalid_token"
-    }
+  "conflicts": [
+    [
+      "_simple_tag",
+      "_tag_with_annotation"
+    ]
   ],
+  "precedences": [],
+  "externals": [],
   "inline": [],
   "supertypes": []
 }
