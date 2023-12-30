@@ -14,12 +14,18 @@ I have chosen to follow popular conventions for the syntax.
 
 ### Comment tags
 
-* Comment tags can contain:
-  - Upper case ascii letters
-  - Numbers (can't start with one)
-  - `-`, `_` (they can't start or end with these characters)
-* Optionally can have an user linked to the tag inside parentheses `()`
-* The name must be followed by `:` and a whitespace
+Comment tags can be:
+
+- Simple tags: A single uppercase word (tag name), optionally followed by `:`.
+  For example: `TODO`, `TODO:`.
+- Annotated tags: A single uppercase word (tag name), followed by an annotation inside parentheses `()`, followed by `:`.
+  For example:  `TODO (user):`.
+
+Tag names are composed of:
+
+- Upper case ASCII letters
+- Numbers (can't start with one)
+- `-`, `_` (they can't start or end with these characters)
 
 ### URIs
 
@@ -42,36 +48,42 @@ XXX:    extra white spaces.
 NOTE-BUG (stsewd): tags can be separated by `-`
 NOTE_BUG: or by `_`.
 
-This will be recognized as a URI
-https://github.com/stsewd/
+NOTE is also a valid tag.
+
+This will be recognized as a URL
+https://github.com/stsewd/.
+
+Even if the URL is surrounded by parenthesis (https://stsewd.dev)
 ```
 
 ## FAQ
 
-### Can I match a tag that doesn't end in `:`, like `TODO`?
+### All uppercase words are highlighted as tags, why?
 
-This grammar doesn't provide a specific token for it,
-but you can match it with this query:
+**Short answer:**
+
+Use a more specific query to match only the tags you want, for example:
 
 ```scm
-("text" @todo
- (#eq? @todo "TODO"))
+((tag (name) @todo)
+ (#any-of? @todo "TODO" "NOTE" "FIXME"))
 ```
+
+**Long answer:**
+
+This grammar use to recognize tags followed by `:` only, but it's not uncommon to see tags without `:`.
+In order to match those types of tags users had to match against `text` nodes,
+but since every word is a text node, that operation was slow.
+So now the grammar matches recognizes all uppercase words as tags instead,
+and no longer exposes `text` nodes.
 
 ### Can I highlight references to issues, PRs, MRs, like `#10` or `!10`?
 
-This grammar doesn't provide a specific token for it,
-but you can match it with this query:
+This grammar doesn't provide a token for it,
+but if you think it should be supported, feel free to open an issue.
 
-```scm
-("text" @issue
- (#match? @issue "^#[0-9]+$"))
-
-;; NOTE: This matches `!10` and `! 10`.
-("text" @symbol . "text" @issue
- (#eq? @symbol "!")
- (#match? @issue "^[0-9]+$"))
-```
+In the past, this was possible by matching against `text` nodes,
+but they are no longer exposed, see https://github.com/stsewd/tree-sitter-comment/pull/33.
 
 ### I'm using Neovim and don't see all tags highlighted
 
@@ -89,6 +101,13 @@ that means it works great for grammars that don't require backtracking,
 or to keep a state for whitespaces (like indentation).
 For these reasons, parsing _languages_ that need to keep a state or falling back to a general token,
 it requires some manual parsing in C.
+
+While it may be possible to write a simple grammar (like this one) in pure JS,
+it would need to make use of the `conflicts` feature or not expose some tokens,
+resolving conflicts is slow in tree-sitter.
+See https://github.com/stsewd/tree-sitter-comment/pull/33.
+
+If you are able to find a way to write this grammar in pure JS that doesn't make it slow, feel free to open a PR!
 
 ## Projects using this grammar
 
