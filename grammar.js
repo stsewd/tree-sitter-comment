@@ -41,33 +41,31 @@ module.exports = grammar({
   name: "comment",
 
   externals: ($) => [
-    $.name,
-    $.invalid_token
+    $._tag_name,
+    $._invalid_token
   ],
 
   rules: {
     source: ($) => repeat(
       choice(
+        // Explicitly end with a "stop" character to help TS disambiguate from a normal tag.
+        seq(alias($.simple_tag, $.tag), choice($._text, /\s/)),
         $.tag,
-        $._full_uri,
-        alias($._text, "text"),
+        $.uri,
+        $._text,
       ),
     ),
 
+    simple_tag: ($) => alias($._simple_tag_name, $.name),
+    _simple_tag_name: ($) => /[A-Z]([A-Z0-9_-]*[A-Z0-9])?/,
+
     tag: ($) => seq(
-      $.name,
-      optional($._user),
+      alias($._tag_name, $.name),
+      optional($._tag_annotation),
       ":",
     ),
 
-    _user: ($) => seq(
-      "(",
-      alias(/[^()]+/, $.user),
-      ")",
-    ),
-
-    // This token is split into two parts so the end character isn't included in the URI itself.
-    _full_uri: ($) => seq($.uri, choice(alias($._end_char, "text"), /\s/)),
+    _tag_annotation: ($) => seq("(", alias(/[^()]+/, $.annotation), ")"),
 
     // This token needs to be single regex, otherwise a partial match will result in an error.
     uri: ($) => get_uri_regex(),

@@ -27,20 +27,15 @@
       "required": true,
       "types": [
         {
-          "type": "name",
+          "type": "annotation",
           "named": true
         },
         {
-          "type": "user",
+          "type": "name",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "text",
-    "named": false,
-    "fields": {}
   },
   {
     "type": "!",
@@ -111,15 +106,15 @@
     "named": false
   },
   {
+    "type": "annotation",
+    "named": true
+  },
+  {
     "type": "name",
     "named": true
   },
   {
     "type": "uri",
-    "named": true
-  },
-  {
-    "type": "user",
     "named": true
   },
   {
