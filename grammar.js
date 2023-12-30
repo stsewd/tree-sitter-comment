@@ -48,7 +48,7 @@ module.exports = grammar({
   rules: {
     source: ($) => repeat(
       choice(
-        // Explicitly end with a "stop" character to help TS desabmiguate from a normal tag.
+        // Explicitly end with a "stop" character to help TS disambiguate from a normal tag.
         seq(alias($.simple_tag, $.tag), choice($._text, /\s/)),
         $.tag,
         $.uri,
