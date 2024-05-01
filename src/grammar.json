@@ -12,6 +12,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "modeline"
+          },
+          {
+            "type": "SYMBOL",
             "name": "_full_uri"
           },
           {
@@ -50,6 +54,158 @@
           "value": ":"
         }
       ]
+    },
+    "modeline": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "vi:"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "vim:"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "ex:"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "option"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "REPEAT1",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[ \\t\\f\\v]"
+                          }
+                        },
+                        {
+                          "type": "STRING",
+                          "value": ":"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "option"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "REPEAT1",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[ \\t\\f\\v]"
+                        }
+                      },
+                      {
+                        "type": "STRING",
+                        "value": ":"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "vi:"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "vim:"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "ex:"
+                  }
+                ]
+              },
+              {
+                "type": "PATTERN",
+                "value": "set? "
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "option"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "Vim:"
+              },
+              {
+                "type": "PATTERN",
+                "value": "set "
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "option"
+                }
+              },
+              {
+                "type": "STRING",
+                "value": ":"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "option": {
+      "type": "PATTERN",
+      "value": "[^\\s:]+"
     },
     "_user": {
       "type": "SEQ",
@@ -277,4 +433,3 @@
   "inline": [],
   "supertypes": []
 }
-

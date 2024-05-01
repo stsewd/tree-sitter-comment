@@ -37,6 +37,8 @@ const STOP_CHARS = [
   "-",
 ];
 
+const WHITE_SPACE = /[ \t\f\v]/;
+
 module.exports = grammar({
   name: "comment",
 
@@ -49,6 +51,7 @@ module.exports = grammar({
     source: ($) => repeat(
       choice(
         $.tag,
+        $.modeline,
         $._full_uri,
         alias($._text, "text"),
       ),
@@ -59,6 +62,31 @@ module.exports = grammar({
       optional($._user),
       ":",
     ),
+
+    modeline: ($) => prec.right(choice(
+      // First form
+      seq(
+        choice("vi:", "vim:", "ex:"),
+        $.option,
+        repeat(seq(choice(repeat1(WHITE_SPACE), ':'), $.option)),
+        optional(choice(repeat1(WHITE_SPACE), ':')),
+      ),
+      // Second form
+      seq(
+        choice("vi:", "vim:", "ex:"),
+        /set? /,
+        repeat1($.option),
+        ":",
+      ),
+      seq(
+        "Vim:",
+        /set /,
+        repeat1($.option),
+        ":",
+      ),
+    )),
+
+    option: ($) => /[^\s:]+/,
 
     _user: ($) => seq(
       "(",
