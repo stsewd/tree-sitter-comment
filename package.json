@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
   "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
     "test": "tree-sitter test",
     "build": "tree-sitter generate",
     "wasm": "tree-sitter build-wasm --docker",
     "web": "tree-sitter web-ui",
-    "parse": "tree-sitter parse"
+    "parse": "tree-sitter parse",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "repository": {
     "type": "git",
@@ -21,12 +24,36 @@
     "comments-tags",
     "comments"
   ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
   "author": "Santos Gallegos",
   "license": "MIT",
-  "dependencies": {
-    "nan": "^2.14.2"
-  },
   "devDependencies": {
-    "tree-sitter-cli": "^0.20.8"
-  }
+    "tree-sitter-cli": "^0.22.5",
+    "prebuildify": "^6.0.0"
+  },
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.comment",
+      "injection-regex": "^comment$"
+    }
+  ]
 }

@@ -1,7 +1,6 @@
-#include <tree_sitter/parser.h>
+#include "tree_sitter/parser.h"
 
 #if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
@@ -16,7 +15,7 @@
 #define MAX_ALIAS_SEQUENCE_LENGTH 3
 #define PRODUCTION_ID_COUNT 1
 
-enum {
+enum ts_symbol_identifiers {
   anon_sym_COLON = 1,
   anon_sym_LPAREN = 2,
   aux_sym__user_token1 = 3,
@@ -307,39 +306,35 @@ static inline bool sym_uri_character_set_1(int32_t c) {
 }
 
 static inline bool aux_sym__text_token1_character_set_1(int32_t c) {
-  return (c < ','
-    ? (c < '\r'
+  return (c < ';'
+    ? (c < ' '
       ? (c < '\t'
         ? c == 0
-        : c <= '\n')
-      : (c <= '\r' || (c < '\''
-        ? (c >= ' ' && c <= '"')
-        : c <= ')')))
-    : (c <= '/' || (c < '['
-      ? (c < '>'
-        ? (c >= ';' && c <= '<')
-        : c <= '?')
-      : (c <= ']' || (c < '}'
-        ? c == '{'
-        : c <= '}')))));
+        : c <= '\r')
+      : (c <= '"' || (c < ','
+        ? (c >= '\'' && c <= ')')
+        : c <= '/')))
+    : (c <= '<' || (c < '{'
+      ? (c < '['
+        ? (c >= '>' && c <= '?')
+        : c <= ']')
+      : (c <= '{' || c == '}'))));
 }
 
 static inline bool aux_sym__text_token1_character_set_2(int32_t c) {
-  return (c < ','
-    ? (c < '\r'
+  return (c < ':'
+    ? (c < ' '
       ? (c < '\t'
         ? c == 0
-        : c <= '\n')
-      : (c <= '\r' || (c < '\''
-        ? (c >= ' ' && c <= '"')
-        : c <= ')')))
-    : (c <= '/' || (c < '['
-      ? (c < '>'
-        ? (c >= ':' && c <= '<')
-        : c <= '?')
-      : (c <= ']' || (c < '}'
-        ? c == '{'
-        : c <= '}')))));
+        : c <= '\r')
+      : (c <= '"' || (c < ','
+        ? (c >= '\'' && c <= ')')
+        : c <= '/')))
+    : (c <= '<' || (c < '{'
+      ? (c < '['
+        ? (c >= '>' && c <= '?')
+        : c <= ']')
+      : (c <= '{' || c == '}'))));
 }
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -368,9 +363,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'h') ADVANCE(17);
       if (lookahead == '{') ADVANCE(24);
       if (lookahead == '}') ADVANCE(31);
-      if (lookahead == '\t' ||
-          lookahead == '\n' ||
-          lookahead == '\r' ||
+      if (('\t' <= lookahead && lookahead <= '\r') ||
           lookahead == ' ') ADVANCE(11);
       if (lookahead != 0) ADVANCE(18);
       END_STATE();
@@ -381,9 +374,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '/') ADVANCE(1);
       END_STATE();
     case 3:
-      if (lookahead == '\t' ||
-          lookahead == '\n' ||
-          lookahead == '\r' ||
+      if (('\t' <= lookahead && lookahead <= '\r') ||
           lookahead == ' ') ADVANCE(9);
       if (lookahead != 0 &&
           lookahead != '(' &&
@@ -392,9 +383,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 4:
       if (sym_uri_character_set_1(lookahead)) ADVANCE(5);
       if (lookahead != 0 &&
-          lookahead != '\t' &&
-          lookahead != '\n' &&
-          lookahead != '\r' &&
+          (lookahead < '\t' || '\r' < lookahead) &&
           lookahead != ' ') ADVANCE(12);
       END_STATE();
     case 5:
@@ -427,9 +416,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(sym_uri);
       if (sym_uri_character_set_1(lookahead)) ADVANCE(5);
       if (lookahead != 0 &&
-          lookahead != '\t' &&
-          lookahead != '\n' &&
-          lookahead != '\r' &&
+          (lookahead < '\t' || '\r' < lookahead) &&
           lookahead != ' ') ADVANCE(12);
       END_STATE();
     case 13:
@@ -532,26 +519,6 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [13] = {.lex_state = 0},
   [14] = {.lex_state = 0},
   [15] = {.lex_state = 0},
-};
-
-enum {
-  ts_external_token_name = 0,
-  ts_external_token_invalid_token = 1,
-};
-
-static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
-  [ts_external_token_name] = sym_name,
-  [ts_external_token_invalid_token] = sym_invalid_token,
-};
-
-static const bool ts_external_scanner_states[3][EXTERNAL_TOKEN_COUNT] = {
-  [1] = {
-    [ts_external_token_name] = true,
-    [ts_external_token_invalid_token] = true,
-  },
-  [2] = {
-    [ts_external_token_name] = true,
-  },
 };
 
 static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
@@ -911,6 +878,26 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [69] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__user, 3),
 };
 
+enum ts_external_scanner_symbol_identifiers {
+  ts_external_token_name = 0,
+  ts_external_token_invalid_token = 1,
+};
+
+static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
+  [ts_external_token_name] = sym_name,
+  [ts_external_token_invalid_token] = sym_invalid_token,
+};
+
+static const bool ts_external_scanner_states[3][EXTERNAL_TOKEN_COUNT] = {
+  [1] = {
+    [ts_external_token_name] = true,
+    [ts_external_token_invalid_token] = true,
+  },
+  [2] = {
+    [ts_external_token_name] = true,
+  },
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -920,11 +907,15 @@ bool tree_sitter_comment_external_scanner_scan(void *, TSLexer *, const bool *);
 unsigned tree_sitter_comment_external_scanner_serialize(void *, char *);
 void tree_sitter_comment_external_scanner_deserialize(void *, const char *, unsigned);
 
-#ifdef _WIN32
-#define extern __declspec(dllexport)
+#ifdef TREE_SITTER_HIDE_SYMBOLS
+#define TS_PUBLIC
+#elif defined(_WIN32)
+#define TS_PUBLIC __declspec(dllexport)
+#else
+#define TS_PUBLIC __attribute__((visibility("default")))
 #endif
 
-extern const TSLanguage *tree_sitter_comment(void) {
+TS_PUBLIC const TSLanguage *tree_sitter_comment() {
   static const TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
