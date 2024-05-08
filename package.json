@@ -7,7 +7,7 @@
   "scripts": {
     "test": "tree-sitter test",
     "build": "tree-sitter generate",
-    "wasm": "tree-sitter build-wasm --docker",
+    "wasm": "tree-sitter build --wasm --docker",
     "web": "tree-sitter web-ui",
     "parse": "tree-sitter parse",
     "install": "node-gyp-build",
@@ -35,7 +35,7 @@
   "author": "Santos Gallegos",
   "license": "MIT",
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.5",
+    "tree-sitter-cli": "^0.22.6",
     "prebuildify": "^6.0.0"
   },
   "dependencies": {

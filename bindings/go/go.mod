@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-comment
+module github.com/stsewd/tree-sitter-comment
 
 go 1.22
 
