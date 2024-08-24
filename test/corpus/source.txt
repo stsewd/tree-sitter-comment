@@ -115,3 +115,29 @@ https://github.com/stsewd/tree-sitter-rst#1.1
     (user))
   (uri)
   (uri))
+
+================================================================================
+Modelines
+================================================================================
+
+vi:noai:sw=3 ts=6
+
+/* Vim: set ai tw=75: */
+
+ex: ai tw=75     :   
+
+vim : set ai spell tw=75:
+
+--------------------------------------------------------------------------------
+
+(source
+  (modeline
+    (option)
+    (option)
+    (option))
+  (modeline
+    (option)
+    (option))
+  (modeline
+    (option)
+    (option)))

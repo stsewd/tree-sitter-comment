@@ -1,5 +1,20 @@
 [
   {
+    "type": "modeline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "option",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source",
     "named": true,
     "fields": {},
@@ -7,6 +22,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "modeline",
+          "named": true
+        },
         {
           "type": "tag",
           "named": true
@@ -99,6 +118,10 @@
     "named": false
   },
   {
+    "type": "Vim:",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -111,7 +134,15 @@
     "named": false
   },
   {
+    "type": "ex:",
+    "named": false
+  },
+  {
     "type": "name",
+    "named": true
+  },
+  {
+    "type": "option",
     "named": true
   },
   {
@@ -121,6 +152,14 @@
   {
     "type": "user",
     "named": true
+  },
+  {
+    "type": "vi:",
+    "named": false
+  },
+  {
+    "type": "vim:",
+    "named": false
   },
   {
     "type": "{",
