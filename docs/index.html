@@ -9,6 +9,7 @@
   - https://github.com/tree-sitter/tree-sitter.github.io/blob/7371e63/tree-sitter.wasm
   - Or download those files from https://github.com/tree-sitter/tree-sitter/releases/
 -->
+
 <head>
   <meta charset="utf-8">
   <title>Grammar for comment tags like TODO - tree-sitter-comment</title>
@@ -45,7 +46,7 @@
       </div>
 
       <select id="language-select" style="display: none;">
-        <option value="comment" selected>Parser</option>
+        <option value="parser" selected>Parser</option>
       </select>
     </header>
 
@@ -66,10 +67,7 @@
     </main>
   </div>
 
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.45.0/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clusterize.js/0.18.0/clusterize.min.js"></script>
@@ -84,12 +82,6 @@
         const $codeEditor = document.querySelector('.CodeMirror');
         if ($codeEditor) {
           $codeEditor.CodeMirror.setValue(codeExample);
-          // The selected language gets cached from other
-          // playgrounds for some reason, force it to update.
-          let languageSelect = document.getElementById('language-select');
-          languageSelect.value = 'comment';
-          let changeEvent = new Event('change');
-          languageSelect.dispatchEvent(changeEvent);
           clearInterval(handle);
         }
       }, 500);
@@ -108,10 +100,10 @@ NOTE: check https://github.com/stsewd/tree-sitter-comment`);
   </script>
 
   <style>
-body {
-  margin: 0;
-  padding: 0;
-}
+    body {
+      margin: 0;
+      padding: 0;
+    }
 
     #playground-container {
       width: 100%;
@@ -143,7 +135,8 @@ body {
       flex-direction: column;
     }
 
-    #code-container, #query-container {
+    #code-container,
+    #query-container {
       flex: 1;
       position: relative;
       overflow: hidden;
@@ -210,6 +203,7 @@ body {
 
     .query-error {
       text-decoration: underline red dashed;
+      -webkit-text-decoration: underline red dashed;
     }
   </style>
 </body>

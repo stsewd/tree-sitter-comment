@@ -11,7 +11,7 @@ serve: build
 release: build format
 	npm run wasm
 	# GitHub pages doesn't like symbolic links
-	cp tree-sitter-comment.wasm docs/js/tree-sitter-comment.wasm
+	cp tree-sitter-comment.wasm docs/js/tree-sitter-parser.wasm
 
 format:
 	clang-format -i \
