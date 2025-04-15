@@ -4,26 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tree-sitter-comment"
-description = "Comment grammar for tree-sitter"
-version = "0.1.0"
+description = "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library"
+version = "0.2.0"
 keywords = ["incremental", "parsing", "tree-sitter", "comment"]
 classifiers = [
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Topic :: Software Development :: Compilers",
   "Topic :: Text Processing :: Linguistic",
-  "Typing :: Typed"
+  "Typing :: Typed",
 ]
-requires-python = ">=3.8"
+authors = [{ name = "Santos Gallegos", email = "stsewd@proton.me" }]
+requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
 Homepage = "https://github.com/stsewd/tree-sitter-comment"
+Funding = "https://github.com/sponsors/stsewd"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.21"]
+core = ["tree-sitter~=0.24"]
 
 [tool.cibuildwheel]
-build = "cp38-*"
+build = "cp310-*"
 build-frontend = "build"

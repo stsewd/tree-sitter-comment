@@ -1,3 +1,12 @@
+/**
+ * @file Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library
+ * @author Santos Gallegos <stsewd@proton.me>
+ * @license MIT
+ */
+
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const END_CHARS = [
   ".",
   ",",
