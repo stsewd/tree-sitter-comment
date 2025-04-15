@@ -10,16 +10,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: npm ci
-      - run: make test
-
+      - uses: actions/checkout@v4
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Run tests
+        uses: tree-sitter/parser-test-action@v2
+        with:
+          test-rust: true
+          test-node: false
+          test-python: true
+          test-go: false
+          test-swift: false
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test
+      - uses: actions/checkout@v4
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Run tests
+        uses: tree-sitter/parser-test-action@v2
+        with:
+          test-rust: true
+          test-node: false
+          test-python: true
+          test-go: false
+          test-swift: false
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up tree-sitter
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Run tests
+        uses: tree-sitter/parser-test-action@v2
+        with:
+          test-rust: true
+          test-node: false
+          test-python: true
+          test-go: false
+          test-swift: false

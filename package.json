@@ -1,59 +1,55 @@
 {
   "name": "tree-sitter-comment",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
+  "repository": "https://github.com/stsewd/tree-sitter-comment",
+  "funding": "https://github.com/sponsors/stsewd",
+  "license": "MIT",
+  "author": {
+    "name": "Santos Gallegos",
+    "email": "stsewd@proton.me",
+    "url": "https://stsewd.dev/"
+  },
   "main": "bindings/node",
   "types": "bindings/node",
-  "scripts": {
-    "test": "tree-sitter test",
-    "build": "tree-sitter generate",
-    "wasm": "tree-sitter build --wasm --docker",
-    "web": "tree-sitter web-ui",
-    "parse": "tree-sitter parse",
-    "install": "node-gyp-build",
-    "prebuildify": "prebuildify --napi --strip"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gihub.com/stsewd/tree-sitter-comment"
-  },
   "keywords": [
+    "incremental",
+    "parsing",
     "tree-sitter",
-    "gramar",
-    "code-tags",
-    "comments-tags",
-    "comments"
+    "comment"
   ],
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/*",
-    "src/**"
+    "src/**",
+    "*.wasm"
   ],
-  "author": "Santos Gallegos",
-  "license": "MIT",
-  "devDependencies": {
-    "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.0"
-  },
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.2.1",
+    "node-gyp-build": "^4.8.2"
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.3"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.21.1"
   },
   "peerDependenciesMeta": {
-    "tree_sitter": {
+    "tree-sitter": {
       "optional": true
     }
   },
-  "tree-sitter": [
-    {
-      "scope": "source.comment",
-      "injection-regex": "^comment$"
-    }
-  ]
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js",
+    "build": "tree-sitter generate",
+    "parse": "tree-sitter parse"
+  }
 }

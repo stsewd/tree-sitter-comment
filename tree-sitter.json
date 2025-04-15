@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "comment",
+      "camelcase": "Comment",
+      "title": "Comment",
+      "scope": "source.comment",
+      "file-types": [
+        "comment"
+      ],
+      "injection-regex": "^comment$",
+      "class-name": "TreeSitterComment"
+    }
+  ],
+  "metadata": {
+    "version": "0.2.0",
+    "license": "MIT",
+    "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
+    "authors": [
+      {
+        "name": "Santos Gallegos",
+        "email": "stsewd@proton.me",
+        "url": "https://stsewd.dev/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/stsewd/tree-sitter-comment",
+      "funding": "https://github.com/sponsors/stsewd"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
