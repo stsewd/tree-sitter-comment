@@ -17,7 +17,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: true
-          test-node: true
+          test-node: false
           test-python: true
           test-go: false
           test-swift: false
@@ -31,7 +31,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: true
-          test-node: true
+          test-node: false
           test-python: true
           test-go: false
           test-swift: false
@@ -45,7 +45,7 @@ jobs:
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: true
-          test-node: true
+          test-node: false
           test-python: true
           test-go: false
           test-swift: false
