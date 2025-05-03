@@ -17,6 +17,7 @@ const END_CHARS = [
   "\\",
   "'",
   '"',
+  "`",
   "}",
   "]",
   ")",
@@ -27,6 +28,7 @@ const STOP_CHARS = [
   "/",
   "'",
   '"',
+  "`",
   "<",
   "(",
   "[",
@@ -95,7 +97,7 @@ module.exports = grammar({
  *
  * - It starts with http:// or https://
  * - It contains at least one character that isn't whitespace or an end character.
- * - If it contains an end character, it must be followed by a letter or number (.com).
+ * - If it contains an end character, it must be followed by a non-whitespace or non-end character.
  * - It doesn't end with a whitespace or an end character (this marks the end of the URI).
  *
  * An end character is a character that marks the end of a sentence.
@@ -103,7 +105,7 @@ module.exports = grammar({
 function get_uri_regex() {
   let end_chars = escapeRegExp(END_CHARS.join(""));
   return new RegExp(
-    `https?://([^\\s${end_chars}]|[${end_chars}][a-zA-Z0-9])+`
+    `https?://([^\\s${end_chars}]|[${end_chars}][^\\s${end_chars}])+`,
   );
 }
 
