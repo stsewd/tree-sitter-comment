@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-comment
 HOMEPAGE_URL := https://github.com/stsewd/tree-sitter-comment
-VERSION := 0.2.0
+VERSION := 0.3.0
 
 # repository
 SRC_DIR := src

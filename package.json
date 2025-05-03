@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-comment",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Grammar for code tags like TODO:, FIXME(user): for the tree-sitter parsing library",
   "repository": "https://github.com/stsewd/tree-sitter-comment",
   "funding": "https://github.com/sponsors/stsewd",
