@@ -94,7 +94,25 @@ URI: https://user:pass@example.com/org/repo/?foo=baz
 
 URI(me): (https://github.com/stsewd/?foo=bar#baz)
 
-https://github.com/stsewd/tree-sitter-rst#1.1
+URLs containing stop characters (dots, slashes, etc):
+
+- https://github.com/stsewd/tree-sitter-rst#1.1
+- https://doc.rust-lang.org/std/boxed/struct.Box.html#impl-IntoIterator-for-Box%3C%5BI%5D,+A%3E
+- https://web.archive.org/web/20250315035304/https://www.wikipedia.org/
+
+URLs containing parentheses:
+
+- https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters
+- https://en.wikipedia.org/wiki/Naming_convention_(programming)#Multiple-word_identifiers
+
+URLs from popular markup languages:
+
+- [Markdown](https://github.com/stsewd/tree-sitter-comment)
+- `reStructuredText <https://github.com/stsewd/tree-sitter-comment>`_
+
+URLs in prose:
+
+Follow me in https://github.com, https://x.com, https://linkedin.com...
 
 --------------------------------------------------------------------------------
 
@@ -113,5 +131,14 @@ https://github.com/stsewd/tree-sitter-rst#1.1
   (tag
     (name)
     (user))
+  (uri)
+  (uri)
+  (uri)
+  (uri)
+  (uri)
+  (uri)
+  (uri)
+  (uri)
+  (uri)
   (uri)
   (uri))

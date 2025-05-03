@@ -95,10 +95,12 @@ test:
 	$(TS) test
 
 serve: all
+	npm run build
 	npm run prestart
 	npm run start
 
 release: all format
+	npm run build
 	npm run prestart
 	# GitHub pages doesn't like symbolic links
 	cp tree-sitter-comment.wasm docs/js/tree-sitter-parser.wasm
