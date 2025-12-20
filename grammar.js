@@ -61,8 +61,15 @@ module.exports = grammar({
       choice(
         $.tag,
         $._full_uri,
+        $.code,
         alias($._text, "text"),
       ),
+    ),
+
+    code: ($) => seq(
+      "`",
+      alias(/[^`]+/, "code_content"),
+      "`",
     ),
 
     tag: ($) => seq(
