@@ -5,6 +5,12 @@
 [Tree-sitter](https://github.com/tree-sitter/tree-sitter) grammar for comment tags like `TODO:`, `FIXME(user):`, etc.
 Useful to be embedded inside comments.
 
+If the first word of a comment starts with `@` (e.g. `@markdown`) then the
+comment is highlighted using the Tree-sitter language given by that word
+(e.g. `markdown`).
+Useful for writing longer comments to describe algorithms, data structures, pros
+and cons etc.
+
 Check the playground at <https://stsewd.dev/tree-sitter-comment/>.
 
 ## Syntax
@@ -45,6 +51,31 @@ NOTE_BUG: or by `_`.
 This will be recognized as a URI
 https://github.com/stsewd/
 ```
+
+## Alternative syntax
+
+If the first word of a comment starts with `@` (e.g. `@markdown`),
+then then the whole comment is highlighted as the
+Tree-sitter language given by that word (e.g. `markdown`).
+
+## Example
+
+A Lua fragment:
+
+```lua
+--[[ @markdown
+## Bookmarks
+
+We use a SQLite database for bookmarks because
+its lightweight and available on every platform.
+
+]]
+
+local db = require 'sqlite'
+```
+
+The line `## Bookmarks` will be highlighted in the editor.
+
 
 ## FAQ
 

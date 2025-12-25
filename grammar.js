@@ -44,6 +44,8 @@ const STOP_CHARS = [
   "]",
   ")",
   ">",
+  // Start of name of injected language, eg. "@markdown".
+  "@",  
   // This must be last, so that it isn't interpreted as a range.
   "-",
 ];
@@ -57,13 +59,27 @@ module.exports = grammar({
   ],
 
   rules: {
-    source: ($) => repeat(
-      choice(
-        $.tag,
-        $._full_uri,
-        alias($._text, "text"),
-      ),
+    source: ($) => choice(
+      $.comment_markup,
+      repeat(
+        choice(
+          $.tag,
+          $._full_uri,
+          alias($._text, "text"),
+        )),
     ),
+
+      // If first line of comment starts with '@' (e.g. @markdown),
+      // then this rule can be used to highlight
+      // the comment as markdown
+      // by using queries/injections.scm.
+    comment_markup: ($) => seq(
+      '@', $.comment_markup_name, $.comment_markup_lines
+    ),
+
+    comment_markup_name: ($) =>  /[a-z_]+/, 
+
+    comment_markup_lines: ($) => /(.|\n)+/,
 
     tag: ($) => seq(
       $.name,

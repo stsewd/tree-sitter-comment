@@ -3,29 +3,63 @@
   "name": "comment",
   "rules": {
     "source": {
-      "type": "REPEAT",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "tag"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_full_uri"
-          },
-          {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_text"
-            },
-            "named": false,
-            "value": "text"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment_markup"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "tag"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_full_uri"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_text"
+                },
+                "named": false,
+                "value": "text"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
+    },
+    "comment_markup": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment_markup_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment_markup_lines"
+        }
+      ]
+    },
+    "comment_markup_name": {
+      "type": "PATTERN",
+      "value": "[a-z_]+"
+    },
+    "comment_markup_lines": {
+      "type": "PATTERN",
+      "value": "(.|\\n)+"
     },
     "tag": {
       "type": "SEQ",
@@ -114,7 +148,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^\\s/'\"`<\\(\\[\\{\\.,:;!\\?\\\\\\}\\]\\)>-]+"
+          "value": "[^\\s/'\"`<\\(\\[\\{\\.,:;!\\?\\\\\\}\\]\\)>@-]+"
         }
       ]
     },
@@ -196,6 +230,10 @@
         {
           "type": "STRING",
           "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": "@"
         },
         {
           "type": "STRING",

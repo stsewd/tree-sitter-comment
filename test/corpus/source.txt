@@ -142,3 +142,55 @@ Follow me in https://github.com, https://x.com, https://linkedin.com...
   (uri)
   (uri)
   (uri))
+
+================================================================================
+Injected markdown
+================================================================================
+
+@markdown
+
+This is text in *italics* and in **bold**. 
+
+This is `code`.
+
+------------------------------------------------------------------------------
+
+(source
+  (comment_markup
+    (comment_markup_name)
+    (comment_markup_lines) ))
+
+
+================================================================================
+No injected markdown
+================================================================================
+
+NOTE: This is not highlighted as markdown, because `@markdown` is not the first word.
+
+@markdown
+
+This is text in *italics* and in **bold**. 
+
+This is `code`.
+
+Follow me in https://github.com
+
+------------------------------------------------------------------------------
+
+ (source
+    (tag
+      (name))
+    (uri))
+
+================================================================================
+Injected reStructuredText
+================================================================================
+
+@rst *italics* and **bolt**.
+
+------------------------------------------------------------------------------
+
+(source
+  (comment_markup
+    (comment_markup_name)
+    (comment_markup_lines) ))

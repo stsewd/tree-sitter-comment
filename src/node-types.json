@@ -1,5 +1,24 @@
 [
   {
+    "type": "comment_markup",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment_markup_lines",
+          "named": true
+        },
+        {
+          "type": "comment_markup_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source",
     "named": true,
     "root": true,
@@ -8,6 +27,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment_markup",
+          "named": true
+        },
         {
           "type": "tag",
           "named": true
@@ -100,6 +123,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -114,6 +141,14 @@
   {
     "type": "`",
     "named": false
+  },
+  {
+    "type": "comment_markup_lines",
+    "named": true
+  },
+  {
+    "type": "comment_markup_name",
+    "named": true
   },
   {
     "type": "name",
